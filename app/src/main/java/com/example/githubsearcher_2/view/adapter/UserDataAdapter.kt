@@ -29,5 +29,5 @@ class UserDataAdapter(private val mArticles: List<GithubUserData>) : RecyclerVie
         return mArticles.size
     }
 
-    class BindingHolder(val binding: GithubItemBinding) : RecyclerView.ViewHolder(binding.mainLayout)
+    class BindingHolder(val binding: GithubItemBinding) : RecyclerView.ViewHolder(binding.userDataItem)
 }

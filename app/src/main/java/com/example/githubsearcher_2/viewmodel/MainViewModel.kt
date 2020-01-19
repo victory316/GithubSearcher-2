@@ -2,7 +2,7 @@ package com.example.githubsearcher_2.viewmodel
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.example.githubsearcher_2.BR
+import androidx.databinding.library.baseAdapters.BR
 import com.example.githubsearcher_2.data.GithubUserData
 
 class MainViewModel(private val mUser: GithubUserData): BaseObservable() {
@@ -15,7 +15,7 @@ class MainViewModel(private val mUser: GithubUserData): BaseObservable() {
         get() = mUser.full_name
         set(title) {
             mUser.full_name = title!!
-            notifyPropertyChanged(BR.fullName)
+            notifyPropertyChanged(BR.full_name)
         }
 
     var descriptions: String?
