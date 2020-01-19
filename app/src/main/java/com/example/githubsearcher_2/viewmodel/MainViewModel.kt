@@ -1,5 +1,7 @@
 package com.example.githubsearcher_2.viewmodel
 
-class MainViewModel {
-    
+import androidx.databinding.BaseObservable
+
+class MainViewModel: BaseObservable() {
+
 }
