@@ -8,15 +8,13 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.Observable
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher_2.R
 import com.example.githubsearcher_2.databinding.ActivityMainBinding
 import com.example.githubsearcher_2.mock.UserMockHelper
-import com.example.githubsearcher_2.remote.GithubClient
 import com.example.githubsearcher_2.view.adapter.UserDataAdapter
 import com.example.githubsearcher_2.viewmodel.MainViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -37,7 +35,8 @@ import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var searchDisposable: Disposable? = null
+    private var successDisposable: Disposable? = null
+    private var failDisposable: Disposable? = null
     private lateinit var githubViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,36 +52,24 @@ class MainActivity : AppCompatActivity() {
         githubViewModel = MainViewModel()
 
         binding.viewModel = githubViewModel
-
         binding.searchRecyclerView.layoutManager = layoutManager
         binding.searchRecyclerView.adapter = adapter
-    }
 
-    fun doSearch() {
-
-        // 검색 이후 키보드를 숨김
-        hideKeyboard()
-
-        val target = binding.searchEditText.text.toString()
-
-        // Gihub search query로 찾고자 하는 유저를 검색
-        searchDisposable = GithubClient().getApi().searchUser(target)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({ result ->
-                githubViewModel.insertList(result.getRepositoryList())
-
-                // 검색결과가 없을 경우의 예외처리 및 피드백
-                if (result.getRepositoryList().isEmpty()) {
-                    Toast.makeText(this, "결과가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+        githubViewModel.showSuccessToast.addOnPropertyChangedCallback(
+            object: Observable.OnPropertyChangedCallback () {
+                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                    Toast.makeText(applicationContext, "Search Success!", Toast.LENGTH_SHORT).show()
+                    githubViewModel.showSuccessToast.set(false)
+                    hideKeyboard()
                 }
+        })
 
-            }, {
-                    error ->
-                run {
-                    // 검색중 오류가 발생했을 경우의 예외처리 및 피드백
-                    error.printStackTrace()
-                    Toast.makeText(this, "검색중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+        githubViewModel.showFailToast.addOnPropertyChangedCallback(
+            object: Observable.OnPropertyChangedCallback () {
+                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                    Toast.makeText(applicationContext, "Search Fail..", Toast.LENGTH_SHORT).show()
+                    githubViewModel.showFailToast.set(false)
+                    hideKeyboard()
                 }
             })
     }
