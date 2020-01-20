@@ -13,7 +13,7 @@ import retrofit2.http.Query
  */
 
 interface GithubApi {
-    @GET("/search/user")
+    @GET("/search/users")
     fun searchUser(@Query("q") users : String,
                    @Query("page") page: Int = 1,
                    @Query("per_page") perPage: Int = 20) : Observable<GithubUserList>
