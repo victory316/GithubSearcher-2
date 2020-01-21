@@ -15,8 +15,6 @@ import com.example.githubsearcher_2.databinding.ActivityMainBinding
 import com.example.githubsearcher_2.mock.UserMockHelper
 import com.example.githubsearcher_2.view.adapter.UserDataAdapter
 import com.example.githubsearcher_2.viewmodel.MainViewModel
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 /**
  *
@@ -35,8 +33,6 @@ import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var successDisposable: Disposable? = null
-    private var failDisposable: Disposable? = null
     private lateinit var githubViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,28 +43,29 @@ class MainActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         val articles = UserMockHelper.mockArticleData
-        val adapter = UserDataAdapter(articles)
+        val actualData = UserMockHelper.actualGithubData
+        val adapter = UserDataAdapter(actualData)
 
-        githubViewModel = MainViewModel()
-
-        binding.viewModel = githubViewModel
         binding.searchRecyclerView.layoutManager = layoutManager
         binding.searchRecyclerView.adapter = adapter
 
-        githubViewModel.showSuccessToast.addOnPropertyChangedCallback(
+        githubViewModel = MainViewModel(articles[0])
+        binding.viewModel = githubViewModel
+
+        binding.viewModel!!.showSuccessToast.addOnPropertyChangedCallback(
             object: Observable.OnPropertyChangedCallback () {
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     Toast.makeText(applicationContext, "Search Success!", Toast.LENGTH_SHORT).show()
-                    githubViewModel.showSuccessToast.set(false)
+                    binding.viewModel!!.showSuccessToast.set(false)
                     hideKeyboard()
                 }
-        })
+            })
 
-        githubViewModel.showFailToast.addOnPropertyChangedCallback(
+        binding.viewModel!!.showFailToast.addOnPropertyChangedCallback(
             object: Observable.OnPropertyChangedCallback () {
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     Toast.makeText(applicationContext, "Search Fail..", Toast.LENGTH_SHORT).show()
-                    githubViewModel.showFailToast.set(false)
+                    binding.viewModel!!.showFailToast.set(false)
                     hideKeyboard()
                 }
             })

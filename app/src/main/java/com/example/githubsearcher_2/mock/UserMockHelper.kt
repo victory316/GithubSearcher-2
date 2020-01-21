@@ -3,14 +3,26 @@ package com.example.githubsearcher_2.mock
 import com.example.githubsearcher_2.data.GithubUserData
 
 object UserMockHelper {
+
     val mockArticleData: List<GithubUserData>
         get() {
             val list = ArrayList<GithubUserData>()
             for (i in 0..24) {
-                val article = GithubUserData("", "")
+                val article = GithubUserData("example", "example")
 
                 list.add(article)
             }
             return list
         }
+
+    val actualGithubData = ArrayList<GithubUserData>()
+
+    fun addData(input: List<GithubUserData>) {
+        actualGithubData.clear()
+        actualGithubData.addAll(input)
+    }
+
+    fun getdata(): ArrayList<GithubUserData> {
+        return actualGithubData
+    }
 }
