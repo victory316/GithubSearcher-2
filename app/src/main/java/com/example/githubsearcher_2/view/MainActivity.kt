@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     Toast.makeText(applicationContext, "Search Success!", Toast.LENGTH_SHORT).show()
                     binding.viewModel!!.showSuccessToast.set(false)
+                    adapter.notifyDataSetChanged()
+
                     hideKeyboard()
                 }
             })
@@ -66,6 +68,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     Toast.makeText(applicationContext, "Search Fail..", Toast.LENGTH_SHORT).show()
                     binding.viewModel!!.showFailToast.set(false)
+                    adapter.notifyDataSetChanged()
+
                     hideKeyboard()
                 }
             })

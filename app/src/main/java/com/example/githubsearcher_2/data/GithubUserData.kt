@@ -1,7 +1,8 @@
 package com.example.githubsearcher_2.data
 
-data class GithubUserData(
-    var full_name: String,
+import com.google.gson.annotations.SerializedName
 
-    var description: String
+data class GithubUserData(
+    @SerializedName("login") val login: String,
+    @SerializedName("score") val score: Double
 )

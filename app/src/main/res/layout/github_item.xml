@@ -27,26 +27,28 @@
             android:layout_margin="5dp"
             android:src="@drawable/folder"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/full_name" />
+            app:layout_constraintTop_toTopOf="@id/login" />
 
         <TextView
-            android:id="@+id/full_name"
+            android:id="@+id/login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textSize="20sp"
+            android:text="@{viewModel.login}"
             app:layout_constraintLeft_toRightOf="@id/sample_icon"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/descriptions"/>
+            app:layout_constraintBottom_toTopOf="@id/node_id"/>
 
         <TextView
-            android:id="@+id/descriptions"
+            android:id="@+id/node_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@id/full_name"
+            android:text="@{viewModel.score}"
+            app:layout_constraintTop_toBottomOf="@id/login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/sample_icon"
             app:layout_constraintRight_toRightOf="parent" />

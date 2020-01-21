@@ -8,7 +8,7 @@ import retrofit2.http.Query
 /**
  *  GithubApi
  *
- *  - /search/repositories 를 통해 검색값으로부터 관련된 json 데이터를 수신
+ *  - /search/users 를 통해 검색값으로부터 관련된 json 데이터를 수신
  *  - 페이지 및 아이템의 갯수 설정
  */
 

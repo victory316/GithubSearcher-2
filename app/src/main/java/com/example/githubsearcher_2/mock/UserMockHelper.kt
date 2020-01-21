@@ -8,7 +8,7 @@ object UserMockHelper {
         get() {
             val list = ArrayList<GithubUserData>()
             for (i in 0..24) {
-                val article = GithubUserData("example", "example")
+                val article = GithubUserData("example", 0.0)
 
                 list.add(article)
             }
@@ -16,13 +16,4 @@ object UserMockHelper {
         }
 
     val actualGithubData = ArrayList<GithubUserData>()
-
-    fun addData(input: List<GithubUserData>) {
-        actualGithubData.clear()
-        actualGithubData.addAll(input)
-    }
-
-    fun getdata(): ArrayList<GithubUserData> {
-        return actualGithubData
-    }
 }
