@@ -26,32 +26,75 @@
             android:layout_height="25dp"
             android:layout_margin="5dp"
             android:src="@drawable/folder"
+            android:contentDescription="@string/sample_icon_desc"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/login" />
+            app:layout_constraintTop_toTopOf="@id/repository_name"/>
 
         <TextView
-            android:id="@+id/login"
+            android:id="@+id/repository_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textSize="20sp"
-            android:text="@{viewModel.login}"
+            android:text="@{viewModel.full_name}"
             app:layout_constraintLeft_toRightOf="@id/sample_icon"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/node_id"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/node_id"
+            android:id="@+id/repository_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textSize="20sp"
-            android:text="@{viewModel.score}"
-            app:layout_constraintTop_toBottomOf="@id/login"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{viewModel.description}"
+            app:layout_constraintTop_toBottomOf="@id/repository_name"
+            app:layout_constraintBottom_toTopOf="@id/star"
             app:layout_constraintLeft_toRightOf="@id/sample_icon"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageView
+            android:id="@+id/star_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/star"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/star_icon_desc"
+            app:layout_constraintLeft_toLeftOf="@id/repository_name"
+            app:layout_constraintTop_toBottomOf="@id/repository_description"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/star"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:text="@{viewModel.stargazers_count}"
+            app:layout_constraintLeft_toRightOf="@id/star_icon"
+            app:layout_constraintTop_toTopOf="@id/star_icon"
+            app:layout_constraintBottom_toBottomOf="@id/star_icon"/>
+
+        <ImageView
+            android:id="@+id/language_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/circle"
+            app:layout_constraintLeft_toRightOf="@id/star"
+            app:layout_constraintTop_toTopOf="@id/star_icon"
+            app:layout_constraintBottom_toBottomOf="@id/star_icon"/>
+
+        <TextView
+            android:id="@+id/language_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:text="@{viewModel.language}"
+            app:layout_constraintLeft_toRightOf="@id/language_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/star_icon"
+            app:layout_constraintBottom_toBottomOf="@id/star_icon"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

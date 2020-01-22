@@ -51,17 +51,31 @@ class MainViewModel(private val userData: GithubUserData): BaseObservable() {
             })
     }
 
-    var login: String
+    var full_name: String
         @Bindable
-        get() = userData.login
+        get() = userData.full_name
         set(full_name) {
-            notifyPropertyChanged(BR.login)
+            notifyPropertyChanged(BR.full_name)
         }
 
-    var score: String?
+    var description: String?
         @Bindable
-        get() = userData.score.toString()
+        get() = userData.description.toString()
         set(description) {
-            notifyPropertyChanged(BR.score)
+            notifyPropertyChanged(BR.description)
+        }
+
+    var stargazers_count: String?
+        @Bindable
+        get() = userData.stargazers_count.toString()
+        set(description) {
+            notifyPropertyChanged(BR.stargazers_count)
+        }
+
+    var language: String?
+        @Bindable
+        get() = userData.language.toString()
+        set(description) {
+            notifyPropertyChanged(BR.language)
         }
 }
