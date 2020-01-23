@@ -12,7 +12,6 @@ import androidx.databinding.Observable
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher_2.R
 import com.example.githubsearcher_2.databinding.ActivityMainBinding
-import com.example.githubsearcher_2.mock.UserMockHelper
 import com.example.githubsearcher_2.view.adapter.UserDataAdapter
 import com.example.githubsearcher_2.viewmodel.MainViewModel
 
@@ -29,6 +28,8 @@ import com.example.githubsearcher_2.viewmodel.MainViewModel
  *
  *  - https://github.com/android/architecture-samples/tree/todo-mvvm-databinding
  *
+ *  - https://github.com/gus0000123/LiveDataSample
+ *
  */
 
 class MainActivity : AppCompatActivity() {
@@ -42,14 +43,14 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val layoutManager = LinearLayoutManager(this)
-        val articles = UserMockHelper.mockArticleData
-        val actualData = UserMockHelper.actualGithubData
-        val adapter = UserDataAdapter(actualData)
+//        val articles = UserMockHelper.mockArticleData
+//        val actualData = UserMockHelper.actualGithubData
+//        val adapter = UserDataAdapter(actualData)
 
         binding.searchRecyclerView.layoutManager = layoutManager
-        binding.searchRecyclerView.adapter = adapter
+//        binding.searchRecyclerView.adapter = adapter
 
-        githubViewModel = MainViewModel(articles[0])
+//        githubViewModel = MainViewModel(articles[0])
         binding.viewModel = githubViewModel
 
         binding.viewModel!!.showSuccessToast.addOnPropertyChangedCallback(
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     Toast.makeText(applicationContext, "Search Success!", Toast.LENGTH_SHORT).show()
                     binding.viewModel!!.showSuccessToast.set(false)
-                    adapter.notifyDataSetChanged()
+//                    adapter.notifyDataSetChanged()
 
                     hideKeyboard()
                 }
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
                     Toast.makeText(applicationContext, "Search Fail..", Toast.LENGTH_SHORT).show()
                     binding.viewModel!!.showFailToast.set(false)
-                    adapter.notifyDataSetChanged()
+//                    adapter.notifyDataSetChanged()
 
                     hideKeyboard()
                 }

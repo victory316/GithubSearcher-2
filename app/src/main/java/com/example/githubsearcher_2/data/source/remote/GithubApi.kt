@@ -1,4 +1,4 @@
-package com.example.githubsearcher_2.remote
+package com.example.githubsearcher_2.data.source.local.remote
 
 import com.example.githubsearcher_2.data.GithubUserList
 import io.reactivex.Observable

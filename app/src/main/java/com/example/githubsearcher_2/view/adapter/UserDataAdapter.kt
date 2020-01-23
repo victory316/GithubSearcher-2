@@ -21,7 +21,7 @@ class UserDataAdapter(private val userData: List<GithubUserData>) : RecyclerView
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
         val binding = holder.binding
-        binding.viewModel = MainViewModel(userData[position])
+//        binding.viewModel = MainViewModel(userData[position])
     }
 
     override fun getItemCount(): Int {

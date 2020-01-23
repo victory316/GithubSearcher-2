@@ -1,4 +1,4 @@
-package com.example.githubsearcher_2.remote
+package com.example.githubsearcher_2.data.source.local.remote
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -15,7 +15,7 @@ private const val BASE_URL = "https://api.github.com"
  */
 
 class GithubClient {
-    fun getApi(): GithubApi  = Retrofit.Builder()
+    fun getApi(): GithubApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(OkHttpClient())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
