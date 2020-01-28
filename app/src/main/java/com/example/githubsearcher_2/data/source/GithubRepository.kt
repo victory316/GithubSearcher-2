@@ -52,7 +52,7 @@ class GithubRepository(
 //        val githubData = GithubUserData(indices.full_name, descriptions, stargazersCount, language)
 ////            repository.insert(githubData)
 //    }
-    
+
     override fun addUserList() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
