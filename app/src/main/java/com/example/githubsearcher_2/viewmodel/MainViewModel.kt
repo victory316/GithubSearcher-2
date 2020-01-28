@@ -1,14 +1,16 @@
 package com.example.githubsearcher_2.viewmodel
 
+import android.app.Application
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.ViewModel
 import com.example.githubsearcher_2.data.source.local.remote.GithubClient
 import com.example.githubsearcher_2.data.source.GithubRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MainViewModel(private val githubRepository: GithubRepository): BaseObservable() {
+class MainViewModel(private val githubRepository: GithubRepository): ViewModel() {
     var currentInput = ObservableField<String> ()
     var showSuccessToast = ObservableBoolean()
     var showFailToast = ObservableBoolean()

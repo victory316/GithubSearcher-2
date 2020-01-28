@@ -1,22 +1,27 @@
 package com.example.githubsearcher_2.data.source
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import com.example.githubsearcher_2.data.GithubUserData
+import com.example.githubsearcher_2.data.source.local.GithubDao
+import com.example.githubsearcher_2.data.source.local.GithubDatabase
 
 class GithubRepository(
     val usersRemoteDataSource: UserDataSource,
     val usersLocalDataSource: UserDataSource
 ) : UserDataSource{
 
-//    private val githubDatabase = GithubDatabase.getInstance(
-//        application
-//    )!!
-//    private val githubDao: GithubDao = githubDatabase.githubDao()
-//    private val githubData: LiveData<List<GithubUserData>> = githubDao.getAll()
+    private lateinit var githubDatabase: GithubDatabase
+    private val githubDao: GithubDao = githubDatabase.githubDao()
+    private val githubData: LiveData<List<GithubUserData>> = githubDao.getAll()
 
-//    fun getAll(): LiveData<List<GithubUserData>> {
-////        return githubData
-//    }
+    fun getAll(): LiveData<List<GithubUserData>> {
+        return githubData
+    }
+
+    fun setupDatabase(application: Application) {
+        githubDatabase = GithubDatabase.getInstance(application)!!
+    }
 
 //    fun insert(githubData: GithubUserData) {
 //        try {
@@ -25,16 +30,15 @@ class GithubRepository(
 //            thread.start()
 //        } catch (e: Exception) { }
 //    }
-//
-//    fun deleteAll() {
-//        try {
-//            val thread = Thread(Runnable {
-//                githubDao.deleteAll()
-//            })
-//            thread.start()
-//        } catch (e: Exception) { }
-//    }
 
+    fun deleteAll() {
+        try {
+            val thread = Thread(Runnable {
+                githubDao.deleteAll()
+            })
+            thread.start()
+        } catch (e: Exception) { }
+    }
 
 //    for (indices in userList) {
 //
@@ -53,12 +57,28 @@ class GithubRepository(
 ////            repository.insert(githubData)
 //    }
 
-    override fun addUserList() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun insertList(userList: List<GithubUserData>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        for (indices in userList) {
+//
+            // 데이터가 없을 경우를 대비한 기본값 설정
+            var fullName = ""
+            var descriptions = "Not described"
+            var stargazersCount = 0
+            var language = "Not described"
+
+            // 공란이 있을 수 있는 자료들에 한해 null check, null일 경우에는 default 값을 적용
+            if (indices.description != null) descriptions = indices.description
+            if (indices.stargazers_count != null) stargazersCount = indices.stargazers_count
+            if (indices.language != null) language = indices.language
+
+            val githubData = GithubUserData(indices.full_name, descriptions, stargazersCount, language)
+
+            try {
+                val thread = Thread(Runnable {
+                    githubDao.insert(githubData) })
+                thread.start()
+            } catch (e: Exception) { }
+        }
     }
 
     override fun getList(): LiveData<List<GithubUserData>> {

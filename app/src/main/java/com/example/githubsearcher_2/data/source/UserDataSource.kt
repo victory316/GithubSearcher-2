@@ -19,8 +19,6 @@ interface UserDataSource {
         fun onDataNotAvailable()
     }
 
-    fun addUserList()
-
     fun insertList(userList: List<GithubUserData>)
 
     fun getList(): LiveData<List<GithubUserData>>

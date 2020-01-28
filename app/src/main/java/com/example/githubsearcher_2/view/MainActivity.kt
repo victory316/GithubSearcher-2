@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher_2.R
 import com.example.githubsearcher_2.databinding.ActivityMainBinding
+import com.example.githubsearcher_2.util.obtainViewModel
 import com.example.githubsearcher_2.viewmodel.MainViewModel
 
 /**
@@ -31,7 +32,7 @@ import com.example.githubsearcher_2.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var githubViewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() {
 //        val adapter = UserDataAdapter(actualData)
 
         binding.searchRecyclerView.layoutManager = layoutManager
+
+        viewModel = obtainViewModel().apply {
+
+        }
 //        binding.searchRecyclerView.adapter = adapter
 
 //        githubViewModel = MainViewModel(articles[0])
@@ -81,4 +86,6 @@ class MainActivity : AppCompatActivity() {
     private fun Activity.hideKeyboard() {
         if (currentFocus == null) View(this) else currentFocus?.let { hideKeyboard(it) }
     }
+
+    fun obtainViewModel(): MainViewModel = this.obtainViewModel(MainViewModel::class.java)
 }
