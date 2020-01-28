@@ -5,6 +5,10 @@
     <data>
         <variable name="viewModel"
             type="com.example.githubsearcher_2.viewmodel.MainViewModel"/>
+
+
+        <variable name="userData"
+            type="com.example.githubsearcher_2.data.GithubUserData"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textSize="20sp"
-            android:text="@{viewModel.full_name}"
+            android:text="@{userData.full_name}"
             app:layout_constraintLeft_toRightOf="@id/sample_icon"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -47,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:textSize="20sp"
-            android:text="@{viewModel.description}"
+            android:text="@{userData.description}"
             app:layout_constraintTop_toBottomOf="@id/repository_name"
             app:layout_constraintBottom_toTopOf="@id/star"
             app:layout_constraintLeft_toRightOf="@id/sample_icon"
@@ -70,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textSize="20sp"
-            android:text="@{viewModel.stargazers_count}"
+            android:text="@{userData.stargazers_count}"
             app:layout_constraintLeft_toRightOf="@id/star_icon"
             app:layout_constraintTop_toTopOf="@id/star_icon"
             app:layout_constraintBottom_toBottomOf="@id/star_icon"/>
@@ -90,7 +94,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_margin="5dp"
-            android:text="@{viewModel.language}"
+            android:text="@{userData.language}"
             app:layout_constraintLeft_toRightOf="@id/language_icon"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@id/star_icon"

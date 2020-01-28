@@ -3,7 +3,6 @@ package com.example.githubsearcher_2.viewmodel
 import androidx.databinding.BaseObservable
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import com.example.githubsearcher_2.mock.UserMockHelper
 import com.example.githubsearcher_2.data.source.local.remote.GithubClient
 import com.example.githubsearcher_2.data.source.GithubRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,12 +22,13 @@ class MainViewModel(private val githubRepository: GithubRepository): BaseObserva
             .subscribeOn(Schedulers.io())
             .subscribe({ result ->
 
-                UserMockHelper.actualGithubData.clear()
-                UserMockHelper.actualGithubData.addAll(result.getRepositoryList())
+
+//                UserMockHelper.actualGithubData.clear()
+//                UserMockHelper.actualGithubData.addAll(result.getRepositoryList())
 
                 // 검색결과가 없을 경우의 예외처리 및 피드백
                 if (result.getRepositoryList().isEmpty()) {
-                    UserMockHelper.actualGithubData.clear()
+//                    UserMockHelper.actualGithubData.clear()
                     showFailToast.set(true)
                 } else {
                     showSuccessToast.set(true)
@@ -39,7 +39,7 @@ class MainViewModel(private val githubRepository: GithubRepository): BaseObserva
             }, {
                     error ->
                 run {
-                    UserMockHelper.actualGithubData.clear()
+//                    UserMockHelper.actualGithubData.clear()
 
                     // 검색중 오류가 발생했을 경우의 예외처리 및 피드백
                     error.printStackTrace()

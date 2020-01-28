@@ -6,13 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.Observable
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher_2.R
 import com.example.githubsearcher_2.databinding.ActivityMainBinding
-import com.example.githubsearcher_2.view.adapter.UserDataAdapter
 import com.example.githubsearcher_2.viewmodel.MainViewModel
 
 /**
@@ -51,29 +48,29 @@ class MainActivity : AppCompatActivity() {
 //        binding.searchRecyclerView.adapter = adapter
 
 //        githubViewModel = MainViewModel(articles[0])
-        binding.viewModel = githubViewModel
-
-        binding.viewModel!!.showSuccessToast.addOnPropertyChangedCallback(
-            object: Observable.OnPropertyChangedCallback () {
-                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                    Toast.makeText(applicationContext, "Search Success!", Toast.LENGTH_SHORT).show()
-                    binding.viewModel!!.showSuccessToast.set(false)
-//                    adapter.notifyDataSetChanged()
-
-                    hideKeyboard()
-                }
-            })
-
-        binding.viewModel!!.showFailToast.addOnPropertyChangedCallback(
-            object: Observable.OnPropertyChangedCallback () {
-                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                    Toast.makeText(applicationContext, "Search Fail..", Toast.LENGTH_SHORT).show()
-                    binding.viewModel!!.showFailToast.set(false)
-//                    adapter.notifyDataSetChanged()
-
-                    hideKeyboard()
-                }
-            })
+//        binding.viewModel = githubViewModel
+//
+//        binding.viewModel!!.showSuccessToast.addOnPropertyChangedCallback(
+//            object: Observable.OnPropertyChangedCallback () {
+//                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+//                    Toast.makeText(applicationContext, "Search Success!", Toast.LENGTH_SHORT).show()
+//                    binding.viewModel!!.showSuccessToast.set(false)
+////                    adapter.notifyDataSetChanged()
+//
+//                    hideKeyboard()
+//                }
+//            })
+//
+//        binding.viewModel!!.showFailToast.addOnPropertyChangedCallback(
+//            object: Observable.OnPropertyChangedCallback () {
+//                override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+//                    Toast.makeText(applicationContext, "Search Fail..", Toast.LENGTH_SHORT).show()
+//                    binding.viewModel!!.showFailToast.set(false)
+////                    adapter.notifyDataSetChanged()
+//
+//                    hideKeyboard()
+//                }
+//            })
     }
 
     private fun Context.hideKeyboard(view: View) {
